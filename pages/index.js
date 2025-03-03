@@ -1,10 +1,5 @@
 function Home() {
-  return (
-    <h1>
-      Minha home, aprendendo a ser um novo programador! Dias melhores virão
-      Beatriz, eu te amo lindeza!
-    </h1>
-  );
+  return <h1>Home do Davizão com domínio próprio. Agora vai rapá!</h1>;
 }
 
 export default Home;
