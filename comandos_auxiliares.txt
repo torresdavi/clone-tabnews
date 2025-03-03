@@ -1,0 +1,6 @@
+git log --stat
+git log --oneline
+git commit --amend
+
+npm run lint:check  # Avisa onde precisa ser corrigido
+npm run lint:fix    # Corrige a formatação
