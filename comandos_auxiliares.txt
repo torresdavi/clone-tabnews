@@ -4,3 +4,8 @@ git commit --amend
 
 npm run lint:check  # Avisa onde precisa ser corrigido
 npm run lint:fix    # Corrige a formatação
+
+docker ps                    # ver os containers e serviços
+docker compose up -d         # Levanta o docker dettached, ou seja, deixa o terminal livre pra usar
+docker rm id                 # exclui o container passado (id)
+docker exect -it id bash     # abre o terminal do container passado (id)
