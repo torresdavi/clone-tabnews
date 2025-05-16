@@ -13,12 +13,17 @@ async function query(queryObject) {
   // connect with client
   await client.connect();
 
-  // call the method query from client passing the query object
-  const result = await client.query(queryObject);
+  try {
+    // call the method query from client passing the query object
+    const result = await client.query(queryObject);
 
-  // closes the connection
-  await client.end();
-  return result;
+    return result;
+  } catch (error) {
+    console.error(error);
+  } finally {
+    // closes the connection
+    await client.end();
+  }
 }
 
 export default {
