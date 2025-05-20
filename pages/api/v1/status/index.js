@@ -1,3 +1,4 @@
+// pages/api/v1/status/index.js
 import database from "infra/database.js";
 
 async function status(request, response) {
