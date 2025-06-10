@@ -14,7 +14,10 @@ async function status(request, response) {
   const parsedDbMaxConnections = parseInt(
     dbMaxConnections.rows[0].max_connections,
   );
-  const parsedDbOpennedConnections = dbOpenedConnections.rows[0].count;
+
+  // use length instead of rows[0].count, because count return all the opened connections
+  // and we want only the actual opened connection
+  const parsedDbOpennedConnections = dbOpenedConnections.rows.length;
   const updatedAt = new Date().toISOString();
 
   response.status(200).json({
@@ -30,5 +33,3 @@ async function status(request, response) {
 }
 
 export default status;
-
-// Desafio: Retornar Versão do Postgres, Qtd de conexões máximas e conexões usadas
