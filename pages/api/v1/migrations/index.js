@@ -14,6 +14,8 @@ export default async function migrations(request, response) {
     migrationsTable: "pgmigrations",
   };
 
+  // Teste deploy automatico
+
   if (request.method === "GET") {
     const pendingMigrations = await migrationRunner(defaultMigrationOptions);
     await dbClient.end();
