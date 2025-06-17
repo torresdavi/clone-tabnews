@@ -14,28 +14,38 @@ export default async function migrations(request, response) {
     migrationsTable: "pgmigrations",
   };
 
-  if (request.method === "GET") {
-    const pendingMigrations = await migrationRunner(defaultMigrationOptions);
-    await dbClient.end();
-    return response.status(200).json(pendingMigrations);
-  }
+  try {
+    switch (request.method) {
+      case "GET":
+        const pendingMigrations = await migrationRunner(
+          defaultMigrationOptions,
+        );
+        return response.status(200).json(pendingMigrations);
+        break;
+      case "POST":
+        // using spread to retrieve values from defaultMigrationOptions
+        // and overwrite dryRun value
+        const migratedMigrations = await migrationRunner({
+          ...defaultMigrationOptions,
+          dryRun: false,
+        });
 
-  if (request.method === "POST") {
-    // using spread to retrieve values from defaultMigrationOptions
-    // and overwrite dryRun value
-    const migratedMigrations = await migrationRunner({
-      ...defaultMigrationOptions,
-      dryRun: false,
-    });
-    await dbClient.end();
+        if (migratedMigrations.length > 0) {
+          return response.status(201).json(migratedMigrations);
+          break;
+        }
 
-    if (migratedMigrations.length > 0) {
-      return response.status(201).json(migratedMigrations);
+        return response.status(200).json(migratedMigrations);
+        break;
+      default:
+        // returns 405 to not allowed for the others requisitions
+        return response.status(405).json({ error: "not allowed." });
+        break;
     }
-
-    return response.status(200).json(migratedMigrations);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  } finally {
+    await dbClient.end();
   }
-
-  // returns 405 to not allowed for the others requisitions
-  return response.status(405).json({ error: "not allowed." });
 }
