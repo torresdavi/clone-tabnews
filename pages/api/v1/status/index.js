@@ -15,7 +15,7 @@ async function status(request, response) {
     dbMaxConnections.rows[0].max_connections,
   );
 
-  const parsedDbOpennedConnections = dbOpenedConnections.rows[0].count;
+  const parsedDbOpenedConnections = dbOpenedConnections.rows[0].count;
   const updatedAt = new Date().toISOString();
 
   response.status(200).json({
@@ -24,7 +24,7 @@ async function status(request, response) {
       database: {
         version: dbVersionString,
         max_connections: parsedDbMaxConnections,
-        active_connections: parsedDbOpennedConnections,
+        active_connections: parsedDbOpenedConnections,
       },
     },
   });
