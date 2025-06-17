@@ -39,7 +39,7 @@ export default async function migrations(request, response) {
         break;
       default:
         // returns 405 to not allowed for the others requisitions
-        return response.status(405).end();
+        return response.status(405).json({ error: "not allowed." });
         break;
     }
   } catch (error) {
