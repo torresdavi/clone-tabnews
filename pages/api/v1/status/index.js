@@ -15,9 +15,7 @@ async function status(request, response) {
     dbMaxConnections.rows[0].max_connections,
   );
 
-  // use length instead of rows[0].count, because count return all the opened connections
-  // and we want only the actual opened connection
-  const parsedDbOpennedConnections = dbOpenedConnections.rows.length;
+  const parsedDbOpennedConnections = dbOpenedConnections.rows[0].count;
   const updatedAt = new Date().toISOString();
 
   response.status(200).json({
