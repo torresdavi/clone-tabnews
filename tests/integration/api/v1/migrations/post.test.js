@@ -1,5 +1,9 @@
 import database from "infra/database.js";
+import orchestrator from "tests/orchestrator";
 
+beforeAll(async () => {
+  await orchestrator.waitForAllServices();
+});
 beforeAll(cleanDatabase);
 
 // Clean the database - droping and recreating
