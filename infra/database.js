@@ -38,7 +38,9 @@ function getSslValues() {
   return process.env.NODE_ENV === "production" ? true : false;
 }
 
-export default {
-  query,
-  getNewClient,
+const database = {
+  query: query,
+  getNewClient: getNewClient,
 };
+
+export default database;
