@@ -1,0 +1,6 @@
+if git diff --cached | grep -iE "[A-Z0-9]{20}"; then
+  echo "There is a Secret Key. Aborting..."
+  exit 1
+fi
+
+exit 0
