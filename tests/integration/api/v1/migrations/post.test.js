@@ -6,33 +6,50 @@ beforeAll(async () => {
   await orchestrator.clearDatabase();
 });
 
-test("POST to api/v1/migrations should return status 200", async () => {
-  const firstResponse = await fetch("http://localhost:3000/api/v1/migrations", {
-    method: "POST",
+describe("POST api/v1/migrations", () => {
+  describe("Anonymous user", () => {
+    describe("For the first time", () => {
+      test("Running Pending Migrations", async () => {
+        const firstResponse = await fetch(
+          "http://localhost:3000/api/v1/migrations",
+          {
+            method: "POST",
+          },
+        );
+
+        const firstResponseBody = await firstResponse.json();
+        expect(firstResponse.status).toBe(201);
+        expect(Array.isArray(firstResponseBody)).toBe(true);
+        expect(firstResponseBody.length).toBeGreaterThan(0);
+      });
+    });
+
+    describe("For the second time", () => {
+      test("Running Pending Migrations", async () => {
+        const secondResponse = await fetch(
+          "http://localhost:3000/api/v1/migrations",
+          {
+            method: "POST",
+          },
+        );
+
+        const secondResponseBody = await secondResponse.json();
+        expect(secondResponse.status).toBe(200);
+        expect(Array.isArray(secondResponseBody)).toBe(true);
+        expect(secondResponseBody.length).toBe(0);
+      });
+    });
   });
-
-  const secondResponse = await fetch(
-    "http://localhost:3000/api/v1/migrations",
-    {
-      method: "POST",
-    },
-  );
-
-  const firstResponseBody = await firstResponse.json();
-  expect(firstResponse.status).toBe(201);
-  expect(Array.isArray(firstResponseBody)).toBe(true);
-  expect(firstResponseBody.length).toBeGreaterThan(0);
-
-  const secondResponseBody = await secondResponse.json();
-  expect(secondResponse.status).toBe(200);
-  expect(Array.isArray(secondResponseBody)).toBe(true);
-  expect(secondResponseBody.length).toBe(0);
 });
 
-test("PUT to api/v1/migrations should return status 405", async () => {
-  const response = await fetch("http://localhost:3000/api/v1/migrations", {
-    method: "PUT",
-  });
+describe("PUT api/v1/migrations", () => {
+  describe("Anonymous user", () => {
+    test("Updating Migrations", async () => {
+      const response = await fetch("http://localhost:3000/api/v1/migrations", {
+        method: "PUT",
+      });
 
-  expect(response.status).toBe(405);
+      expect(response.status).toBe(405);
+    });
+  });
 });
