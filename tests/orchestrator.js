@@ -1,6 +1,7 @@
+import database from "infra/database.js";
 import retry from "async-retry";
 
-// Brincar com console log dentro da função e ver resultados
+// Wait for server get up before execute tests
 async function waitForAllServices() {
   await waitForWebServer();
 
@@ -20,8 +21,13 @@ async function waitForAllServices() {
   }
 }
 
+async function clearDatabase() {
+  await database.query("drop schema public cascade; create schema public;");
+}
+
 const orchestrator = {
   waitForAllServices,
+  clearDatabase,
 };
 
 export default orchestrator;
