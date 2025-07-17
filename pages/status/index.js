@@ -38,7 +38,10 @@ function StatusData() {
 
   return (
     <>
-      <h2>Última atualização: {updatedAtText}</h2>
+      <p>
+        <b>Última atualização:</b> {updatedAtText}
+      </p>
+      <h1>Banco de Dados</h1>
       <p>
         <b>Versão do Banco de Dados:</b> {databaseVersionText}
       </p>
