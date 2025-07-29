@@ -10,6 +10,8 @@ docker compose up -d         # Levanta o docker dettached, ou seja, deixa o term
 docker rm id                 # exclui o container passado (id)
 docker exect -it id bash     # abre o terminal do container passado (id)
 
+curl -s -X POST http://localhost:3000/api/v1/status | python3 -m json.tool --no-ensure-ascii
+
 
 <!-- Links Auxiliares -->
 
