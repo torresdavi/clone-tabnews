@@ -41,15 +41,3 @@ describe("POST api/v1/migrations", () => {
     });
   });
 });
-
-describe("PUT api/v1/migrations", () => {
-  describe("Anonymous user", () => {
-    test("Updating Migrations", async () => {
-      const response = await fetch("http://localhost:3000/api/v1/migrations", {
-        method: "PUT",
-      });
-
-      expect(response.status).toBe(405);
-    });
-  });
-});
