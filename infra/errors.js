@@ -20,7 +20,7 @@ export class InternalServerError extends Error {
 
 export class MethodNotAllowedError extends Error {
   constructor() {
-    super("Método não permitido para este enpoint.");
+    super("Método não permitido para este endpoint.");
     this.name = "MethodNotAllowedError";
     this.action =
       "Verifique se o método HTTP enviado é valido para este endpoint.";
