@@ -1,4 +1,4 @@
-// pages/api/v1/status/index.js
+// controller: /api/v1/status/index.js
 import { createRouter } from "next-connect";
 import database from "infra/database.js";
 import controller from "infra/controller";

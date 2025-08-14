@@ -1,3 +1,4 @@
+// controller: api/v1/users/index.js
 import { createRouter } from "next-connect";
 import controller from "infra/controller";
 import user from "models/user.js";

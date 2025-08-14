@@ -1,3 +1,4 @@
+// view : pages/index.js
 function Home() {
   return <h1>Home do Davizão com domínio próprio. Agora vai rapá!</h1>;
 }
