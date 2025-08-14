@@ -90,7 +90,6 @@ async function findByUserName(username) {
   }
 }
 
-// create user
 async function create(userInputValues) {
   await validateUniqueEmail(userInputValues.email);
   await validatePresenceEmail(userInputValues.email);
@@ -121,16 +120,13 @@ async function create(userInputValues) {
   }
 }
 
-// update user
 async function update(username, userInputValues) {
   if (userInputValues.email) {
     await validateUniqueEmail(userInputValues.email);
-    await validatePresenceEmail(userInputValues.email);
   }
 
   if (userInputValues.username) {
     await validateUniqueUsername(userInputValues.username);
-    await validatePresenceUsername(userInputValues.username);
   }
 
   const updatedUser = await runUpdateQuery(username, userInputValues);
