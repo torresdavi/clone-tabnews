@@ -19,3 +19,5 @@ curl -s -X POST http://localhost:3000/api/v1/status | python3 -m json.tool --no-
 https://docs.github.com/pt/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
 
 # https://nodejs.org/api/url.html#the-whatwg-url-api
+
+# https://reqbin.com/post-online
