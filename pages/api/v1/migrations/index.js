@@ -1,3 +1,4 @@
+// controller: api/v1/migrations/index.js
 import { createRouter } from "next-connect";
 import controller from "infra/controller";
 import migrator from "models/migrator.js";

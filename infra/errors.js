@@ -57,11 +57,42 @@ export class ServiceError extends Error {
   }
 }
 
-// {
-//  "name": "NomeDoErro",
-//  "message": "Mensagem explicando o que aconteceu",
-//  "action": "Mensagem recomendando fazer alguma ação",
-//  "status_code": 500
-// }
-//
-//
+export class ValidationError extends Error {
+  constructor({ cause, message, action }) {
+    super(message || "Um erro de validação ocorreu.", {
+      cause,
+    });
+    this.name = "ValidationError";
+    this.action = action || "Ajuste os dados enviados e tente novamente.";
+    this.statusCode = 400;
+  }
+
+  toJSON() {
+    return {
+      name: this.name,
+      message: this.message,
+      action: this.action,
+      status_code: this.statusCode,
+    };
+  }
+}
+
+export class NotFoundError extends Error {
+  constructor({ cause, message, action }) {
+    super(message || "Página não encontrada.", {
+      cause,
+    });
+    this.name = "NotFoundError";
+    this.action = action || "Verifique a rota e tente novamente.";
+    this.statusCode = 404;
+  }
+
+  toJSON() {
+    return {
+      name: this.name,
+      message: this.message,
+      action: this.action,
+      status_code: this.statusCode,
+    };
+  }
+}

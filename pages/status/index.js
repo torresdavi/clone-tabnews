@@ -1,3 +1,4 @@
+// view: pages/status/index.js
 import useSWR from "swr";
 
 async function fetchAPI(key) {
