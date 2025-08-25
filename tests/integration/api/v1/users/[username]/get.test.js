@@ -28,7 +28,7 @@ describe("GET api/v1/users/[username]", () => {
 
       // Retrieving user
       const response2 = await fetch(
-        "http://localhost:3000/api/v1/users/CasemaTch",
+        "http://localhost:3000/api/v1/users/CaseMatch",
       );
 
       const response2Body = await response2.json();
@@ -36,7 +36,7 @@ describe("GET api/v1/users/[username]", () => {
       expect(response2.status).toBe(200);
       expect(response2Body).toEqual({
         id: response2Body.id,
-        username: "casematch",
+        username: "CaseMatch",
         email: "casematch@gmail.com",
         password: response2Body.password,
         created_at: response2Body.created_at,
