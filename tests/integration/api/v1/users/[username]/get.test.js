@@ -12,19 +12,11 @@ describe("GET api/v1/users/[username]", () => {
   describe("Anonymous user", () => {
     test("With exact case match", async () => {
       // Populating users db
-      const response1 = await fetch("http://localhost:3000/api/v1/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: "CaseMatch",
-          email: "CaseMatch@gmail.com",
-          password: "123456",
-        }),
+      await orchestrator.createUser({
+        username: "CaseMatch",
+        email: "CaseMatch@gmail.com",
+        password: "123456",
       });
-
-      expect(response1.status).toBe(201);
 
       // Retrieving user
       const response2 = await fetch(
@@ -50,21 +42,32 @@ describe("GET api/v1/users/[username]", () => {
 
     test("With case mismatch", async () => {
       // Populating users db
-      await fetch("http://localhost:3000/api/v1/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: "ExistentUser",
-          email: "userexists@gmail.com",
-          password: "123456",
-        }),
+      await orchestrator.createUser({
+        username: "MisMatchUser",
+        email: "userexists@gmail.com",
+        password: "123456",
       });
 
       // Retrieving user
       const response = await fetch(
         "http://localhost:3000/api/v1/users/mismatchUser",
+      );
+
+      const responseBody = await response.json();
+
+      expect(response.status).toBe(404);
+      expect(responseBody).toEqual({
+        name: "NotFoundError",
+        message: "O usuário não foi encontrado.",
+        action: "Verifique se o username foi digitado corretamente.",
+        status_code: 404,
+      });
+    });
+
+    test("With nonexistent username", async () => {
+      // Retrieving user
+      const response = await fetch(
+        "http://localhost:3000/api/v1/users/nonExistentUser",
       );
 
       const responseBody = await response.json();
