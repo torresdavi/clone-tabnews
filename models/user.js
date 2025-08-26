@@ -14,7 +14,7 @@ async function findByUserName(username) {
       FROM
         users
       WHERE
-        LOWER(username) = LOWER($1)
+        username = $1
       LIMIT
         1
       ;`,
